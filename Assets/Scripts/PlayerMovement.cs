@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float _moveSpeed = 5;
-
     private Rigidbody2D _rb;
-    float horizontalInput = Input.GetAxisRaw("Horizontal");
 
+    public float _moveSpeed = 5;
+    float horizontalInput = 0f;
 
     private void Start()
     {
@@ -17,11 +16,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        horizontalInput = Input.GetAxisRaw("Horizontal");
     }
 
     private void FixedUpdate()
     {
+        Vector2 direction = new Vector2(horizontalInput, 0).normalized;
 
-        Vector3 moveInput = new Vector3(horizontalInput, 0, 0);
+        _rb.velocity = direction * _moveSpeed;
     }
 }
